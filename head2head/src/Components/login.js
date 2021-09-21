@@ -1,11 +1,10 @@
-import React, {useState }from 'react';
+import React, { useState } from 'react';
+
 import axios from 'axios';
 
+function Login() {
 
-function Register() {
-
-    const [user,setUser] = useState({});
-    const [name,setName]= useState("");
+    
     const [email,setEmail]= useState("");
     const [password,setPassword]= useState("");
 
@@ -15,15 +14,15 @@ function Register() {
         
     };
 
-    const registerUser = async () => {
-        await axios.post('http://localhost:5500/api/users',{
-            name: name,
+    const loginUser = async () => {
+        await axios.post('http://localhost:5500/api/auth',{
+            
             email: email,
             password: password,
         })
         .then((res) => {
             console.log(res)
-            setUser(res)
+            
         })
         .catch(error => console.log(error))
     }
@@ -31,26 +30,23 @@ function Register() {
 
     return (
         <div className="container-fluid">
-            <h2>Register</h2>
+            <h2>login</h2>
             <form onSubmit={submitHandler}>
                 <div>
                     <label htmlFor="email"><b>Email:</b> </label>
                     <input type="email" name="email" placeholder="email..." onChange ={e=> setEmail(e.target.value)}/>
                 </div>
+               
                 <div>
-                    <label htmlFor="name"><b>Username:</b> </label>
-                    <input type="name" name="name" placeholder="username..." onChange={e=> setName(e.target.value)}/>
-                </div>
-                    <div>
                     <label htmlFor="password"><b>Password:</b> </label>
                     <input type="password" name="password" placeholder="password..." onChange={e=> setPassword(e.target.value)}/>
                 </div>
                 <div>
-                    <button onClick={()=>{registerUser()}} >Register</button>
+                    <button onClick={()=>{loginUser()}} >login</button>
                 </div>
             </form>
         </div>
     )
 }
 
-export default Register
+export default Login

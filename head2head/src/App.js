@@ -4,7 +4,8 @@ import {BrowserRouter as Router,
 Switch,
 Route,
 Redirect} from "react-router-dom"
-
+import Register from './Components/Register'
+import Login from './Components/login'
 const App = () => {
     const [user, setUser]= useState({})
 
@@ -26,9 +27,14 @@ const App = () => {
     return (
         <Router>
             <div>
-                <h1> Hello World</h1>
+                <h1> Head2Head</h1>
             </div>
-            <div></div>
+            <div>
+              <Register/>
+            </div>
+            <div>
+              <Login/>
+            </div>
         </Router>
     )
 }
