@@ -4,7 +4,7 @@ import axios from 'axios';
 
 function Register() {
 
-    const [user,setUser] = useState({});
+   
     const [name,setName]= useState("");
     const [email,setEmail]= useState("");
     const [password,setPassword]= useState("");
@@ -23,7 +23,7 @@ function Register() {
         })
         .then((res) => {
             console.log(res)
-            setUser(res)
+            
         })
         .catch(error => console.log(error))
     }

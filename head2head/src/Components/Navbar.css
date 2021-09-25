@@ -1,0 +1,21 @@
+.topnav {
+    overflow: hidden;
+    background-color: rgba(253, 253, 253, 0.013);
+    display: flex;
+  }
+  
+  /* Style the topnav links */
+.topnav a {
+    float: left;
+    display: flex;
+    color: #8f0c0c;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration:underline ;
+  }
+  
+  /* Change color on hover */
+  .topnav a:hover {
+    background-color: rgb(24, 10, 156);
+    color: rgb(255, 255, 255);
+  }
