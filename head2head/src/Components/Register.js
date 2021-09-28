@@ -1,18 +1,18 @@
 import React, {useState }from 'react';
 import axios from 'axios';
+import '../index.css'
+import { Form } from 'react-bootstrap';
 
 
 function Register() {
 
-   
+
     const [name,setName]= useState("");
     const [email,setEmail]= useState("");
     const [password,setPassword]= useState("");
 
-    const submitHandler =(e) =>{
+    const submitHandler =(e) => {
         e.preventDefault();
-
-        
     };
 
     const registerUser = async () => {
@@ -23,34 +23,56 @@ function Register() {
         })
         .then((res) => {
             console.log(res)
-            
         })
         .catch(error => console.log(error))
     }
 
 
     return (
-        <div className="container-fluid">
-            <h2>Register</h2>
-            <form onSubmit={submitHandler}>
-                <div>
-                    <label htmlFor="email"><b>Email:</b> </label>
-                    <input type="email" name="email" placeholder="email..." onChange ={e=> setEmail(e.target.value)}/>
-                </div>
-                <div>
-                    <label htmlFor="name"><b>Username:</b> </label>
-                    <input type="name" name="name" placeholder="username..." onChange={e=> setName(e.target.value)}/>
-                </div>
-                    <div>
-                    <label htmlFor="password"><b>Password:</b> </label>
-                    <input type="password" name="password" placeholder="password..." onChange={e=> setPassword(e.target.value)}/>
-                </div>
-                <div>
-                    <button onClick={()=>{registerUser()}} >Register</button>
-                </div>
-            </form>
-        </div>
-    )
+      <div className="card">
+        <h2>Register</h2>
+        <form onSubmit={submitHandler}>
+          <Form.Group size="md" controlId="small">
+            <Form.Label> Email: </Form.Label>
+            <Form.Control
+              autoFocus
+              type="email"
+              value={email}
+              placeholder= "Email..."
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group size="md" controlId="small">
+            <Form.Label> Username:</Form.Label>
+            <Form.Control
+              autoFocus
+              type="name"
+              value={name}
+              placeholder="Username"
+              onChange={(e) => setName(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group size="md" controlId="small">
+            <Form.Label> Password: </Form.Label>
+            <Form.Control
+              autoFocus
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </Form.Group>
+          <div>
+            <button
+              onClick={() => {
+                registerUser();
+              }}
+            >
+              Register
+            </button>
+          </div>
+        </form>
+      </div>
+    );
 }
 
 export default Register

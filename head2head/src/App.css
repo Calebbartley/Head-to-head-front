@@ -1,4 +1,23 @@
-.body{
-    background:#E82424;
+
+.logo{
+    image-rendering: auto;
+    content:url('./images/purp.png');
+    height: 100px;
+    width: 100px;
     
 }
+
+body{
+    background:url('./images/sub.png');
+    background-repeat:no-repeat;
+    display: grid;
+    background-size: cover;
+
+}
+
+
+h1{
+    color :whitesmoke ;
+    padding: 50px 30px;
+}
+

@@ -1,0 +1,12 @@
+.card{
+    justify-content: center;
+    height: 139px;
+    width: 300px;
+    text-align: center;
+    background-color: aqua;
+    display: grid;
+    align-items: center;
+    position: absolute;
+}
+
+

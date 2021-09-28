@@ -47,9 +47,9 @@ const Spotify = () => {
   };
 
   return (
-    <div className="container">
+    <div className="navbar">
       <h1>Login to your Spotify account:</h1>
-      <button onClick={handleLogin}>login to spotify</button>
+      <button  onClick={handleLogin}>login to spotify</button>
       <SpotifyPlaylistsCap />
     </div>
   );
