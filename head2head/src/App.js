@@ -14,6 +14,8 @@ import "react-bootstrap";
 import "./App.css";
 import Spotify from "./Components/Spotify";
 import Profile from "./Components/Profile";
+import Player from "./Components/Player";
+
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -23,29 +25,28 @@ const App = () => {
     const jwt = localStorage.getItem("token");
 
     try {
-      const user = jwtDecode(jwt);
-      setUser({ user });
+      const decoded = jwtDecode(jwt);
+      setUser(decoded);
     } catch {}
   }, []);
 
-  const Logout= ()=>{
-    localStorage.removeItem("token")
-    console.log(`${user.id} Has been logged out`)
-    window.location= "/home"
-  }
+  
+
+  // const Logout= () =>{
+  //   localStorage.removeItem("token")
+  //   console.log("Has been logged out")
+  //   window.location= "/home"
+  // }
 
   return (
     <div>
       <Router>
         <div >
           <div className="logo" >
-            <container >
-            
-            </container>
           </div>
           <Navbar user={user} />
           <Switch className="topnav">
-            <Route path="/Home" component={Home} />
+            <Route exact path="/" component={Home} />
             <Route path="/Register" component={Register} />
             <Route path="/Login" component={Login} render={props =>{
               if(!user){
@@ -58,13 +59,14 @@ const App = () => {
             }} />
             <Route path='/profile' component={Profile} />
             <Route path="/Spotify" component={Spotify} />
-            <button onClick={()=>{Logout()}}>Logout</button>
+            
           </Switch>
         </div>
-       
+        
       </Router>
     </div>
   );
 };
+
 
 export default App;
