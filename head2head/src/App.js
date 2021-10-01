@@ -19,7 +19,7 @@ import Player from "./Components/Player";
 
 const App = () => {
   const [user, setUser] = useState(null);
-  
+
 
   useEffect(() => {
     const jwt = localStorage.getItem("token");
@@ -30,7 +30,7 @@ const App = () => {
     } catch {}
   }, []);
 
-  
+
 
   // const Logout= () =>{
   //   localStorage.removeItem("token")
@@ -55,14 +55,11 @@ const App = () => {
               else{
                 return <Redirect to="/profile" />
               }
-  
             }} />
             <Route path='/profile' component={Profile} />
             <Route path="/Spotify" component={Spotify} />
-            
           </Switch>
         </div>
-        
       </Router>
     </div>
   );

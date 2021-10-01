@@ -1,6 +1,6 @@
 import React, {useState }from 'react';
 import axios from 'axios';
-import '../index.css'
+import './Login.css'
 import { Form } from 'react-bootstrap';
 
 
@@ -29,9 +29,9 @@ function Register() {
 
 
     return (
-      <div className="card">
+      <div className="Login">
         <h2>Register</h2>
-        <form onSubmit={submitHandler}>
+        <form className="Login-form" onSubmit={submitHandler}>
           <Form.Group size="md" controlId="small">
             <Form.Label> Email: </Form.Label>
             <Form.Control

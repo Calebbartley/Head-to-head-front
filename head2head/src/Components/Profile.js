@@ -18,14 +18,12 @@ function Profile() {
     window.location= "/home"
   }
 
-  
-  const comments_endpoint = ''
 
     return (
       <div>
         <h1>Profile Page</h1>
         <PostStatus/>
-       
+        
         <button onClick={Logout}>Logout</button>
       </div>
     );

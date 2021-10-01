@@ -2,14 +2,14 @@
     .Login {
       padding: 60px 0;
       align-items: center;
+      color: white
     }
   
     .Login-form {
       margin: 0 auto;
       max-width: 320px;
-
     }
-  }
+}
 
 h2{
   display: grid;
