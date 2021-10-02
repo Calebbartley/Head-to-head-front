@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import PostStatus from './PostStatus';
 import Player from './Player';
-
+import GetStatus from './GetStatus';
 
 
 function Profile() {
@@ -23,7 +23,7 @@ function Profile() {
       <div>
         <h1>Profile Page</h1>
         <PostStatus/>
-        
+        <GetStatus/>
         <button onClick={Logout}>Logout</button>
       </div>
     );
