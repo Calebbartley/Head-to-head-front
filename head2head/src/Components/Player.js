@@ -1,40 +1,139 @@
-import React from 'react';
-import './Player.css'
-const Player= props => {
-    const backgroundStyles = {
-        backgroundImage:`url(${
-          props.item.album.images[0].url
-        })`,
-    };
+import React, { Component , Fragment} from 'react'
 
-    const progressBarStyles = {
-        width: (props.progress_ms * 100 / props.item.duration_ms) + '%'
-    };
+
+export default class Player extends Component {
+  deviceSelectedInterval = null
+  statePollingInterval = null
+  webPlaybackInstance = null
+
+  state = {
+    playerReady: false,
+    playerSelected: false
+  }
     
+  async handleState(state) {
+    if (state) {
+      this.props.onPlayerStateChange(state);
+    } else {
+      let {
+        _options: { id: device_id }
+      } = this.webPlaybackInstance;
 
+      this.clearStatePolling();
+      this.props.onPlayerWaitingForDevice({ device_id: device_id });
+      await this.waitForDeviceToBeSelected();
+      this.props.onPlayerDeviceSelected();
+    }
+  }
 
-    return (
-        <div className="App">
-      <div className="main-wrapper">
-        <div className="now-playing__img">
-          <img src={props.item.album.images[0].url} />
-        </div>
-        <div className="now-playing__side">
-          <div className="now-playing__name">{props.item.name}</div>
-          <div className="now-playing__artist">
-            {props.item.artists[0].name}
-          </div>
-          <div className="now-playing__status">
-            {props.is_playing ? "Playing" : "Paused"}
-          </div>
-          <div className="progress">
-            <div className="progress__bar" style={progressBarStyles} />
-          </div>
-        </div>
-        <div className="background" style={backgroundStyles} />{" "}
-      </div>
-    </div>
-    )
-}
+  waitForSpotify() {
+    return new Promise(resolve => {
+      if ('Spotify' in window) {
+        resolve();
+      } else {
+        window.onSpotifyWebPlaybackSDKReady = () => { resolve(); };
+      }
+    });
+  }
 
-export default Player
+  waitForDeviceToBeSelected() {
+    return new Promise(resolve => {
+      this.deviceSelectedInterval = setInterval(() => {
+        if (this.webPlaybackInstance) {
+          this.webPlaybackInstance.getCurrentState().then(state => {
+            if (state !== null) {
+              this.startStatePolling();
+              clearInterval(this.deviceSelectedInterval);
+              resolve(state);
+            }
+          });
+        }
+      });
+    });
+  }
+
+  startStatePolling() {
+    this.statePollingInterval = setInterval(async () => {
+      let state = await this.webPlaybackInstance.getCurrentState();
+      await this.handleState(state);
+    }, this.props.playerRefreshRateMs || 1000);
+  }
+
+  clearStatePolling() {
+    clearInterval(this.statePollingInterval);
+  }
+
+  async setupWebPlaybackEvents() {
+    let { Player } = window.Spotify;
+
+    this.webPlaybackInstance = new Player({
+      name: this.props.playerName,
+      volume: this.props.playerInitialVolume,
+      getOAuthToken: async callback => {
+        if (typeof this.props.onPlayerRequestAccessToken !== "undefined") {
+          let userAccessToken = await this.props.onPlayerRequestAccessToken();
+          callback(userAccessToken);
+        }
+      }
+    });
+    
+    this.webPlaybackInstance.on("initialization_error", e => {
+      this.props.onPlayerError(e.message);
+    });
+    
+    this.webPlaybackInstance.on("authentication_error", e => {
+      this.props.onPlayerError(e.message);
+    });
+
+    this.webPlaybackInstance.on("account_error", e => {
+      this.props.onPlayerError(e.message);
+    });
+
+    this.webPlaybackInstance.on("playback_error", e => {
+      this.props.onPlayerError(e.message);
+    });
+
+    this.webPlaybackInstance.on("player_state_changed", async state => {
+      await this.handleState(state);
+    });
+
+    this.webPlaybackInstance.on("ready", data => {
+      this.props.onPlayerWaitingForDevice(data);
+    });
+
+    if (this.props.playerAutoConnect) {
+      this.webPlaybackInstance.connect();
+    }
+  }
+
+  setupWaitingForDevice() {
+    return new Promise(resolve => {
+      this.webPlaybackInstance.on("ready", data => {
+        resolve(data);
+      });
+    });
+  }
+
+  async componentWillMount() {
+    // Notify the player is loading
+    this.props.onPlayerLoading();
+    
+    // Wait for Spotify to load player
+    await this.waitForSpotify();
+    
+    // Setup the instance and the callbacks
+    await this.setupWebPlaybackEvents();
+    
+    // Wait for device to be ready
+    let device_data = await this.setupWaitingForDevice();
+    this.props.onPlayerWaitingForDevice(device_data);
+
+    // Wait for device to be selected
+    await this.waitForDeviceToBeSelected();
+    this.props.onPlayerDeviceSelected();
+  }
+
+  render() {
+    return (<Fragment>{this.props.children}</Fragment>);
+  }
+};
