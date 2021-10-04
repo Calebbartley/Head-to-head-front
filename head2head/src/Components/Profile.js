@@ -24,7 +24,7 @@ function Profile() {
         <h1>Profile Page</h1>
         <PostStatus/>
         <GetStatus/>
-        {<Player/>}
+        {/*<Player/>*/}
         <button onClick={Logout}>Logout</button>
       </div>
     );

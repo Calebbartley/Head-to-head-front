@@ -52,7 +52,7 @@ function Login() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>
-            <button onClick={() => {loginUser();}}>Login </button>
+            <button onClick={() => {loginUser()}}>Login </button>
         </form>
       </div>
     );
