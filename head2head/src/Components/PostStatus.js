@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback} from 'react';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import './Login.css'
+import {Button, FormGroup, FormLabel} from "react-bootstrap"
 
 
 function PostStatus(user) {
@@ -27,6 +28,8 @@ function PostStatus(user) {
     const submitHandler =(e) => {
         e.preventDefault();
     };
+
+    
     
     const newStatus = async () => {
         const jwt = localStorage.getItem('token');
@@ -43,7 +46,7 @@ function PostStatus(user) {
         .catch(error => console.log(error))
     }
     
-
+    
    
     if (user){
 
@@ -51,18 +54,11 @@ function PostStatus(user) {
     return (
         <div>
             <div>
-            <form className= "Login-form" onSubmit={submitHandler}>
-                <input type="text" placeholder="what's on your mind" onChange={(e)=>{setStatus(e.target.value)}}/>
-                <button onClick={()=>{newStatus()}}>Post</button>
-                
-            </form>
-            </div>
-            <div>
-               <ul>
-                {
-                    allStatus.map(allStatus => (<li key={user.id}>{user.status}</li>))
-                }
-               </ul>
+                <form className= "Login-form" onSubmit={submitHandler}>
+                    <input type="text" placeholder="what's on your mind" onChange={(e)=>{setStatus(e.target.value)}}/>
+                    <input type="File" placeholder="Post a Pic" onChange={(e)=>{setStatus(e.target.value)}}/>
+                    <Button onClick={()=>{newStatus()}}>Post</Button>
+                </form>
             </div>
         </div>
     )

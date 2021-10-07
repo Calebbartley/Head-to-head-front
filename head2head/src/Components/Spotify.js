@@ -3,7 +3,7 @@ import SpotifyPlaylistsCap from './Playlist';
 
 const CLIENT_ID = "ec51a3bbaf954935b24d88b1818089c9"; // insert your client id here from spotify
 const SPOTIFY_AUTHORIZE_ENDPOINT = "https://accounts.spotify.com/authorize";
-const REDIRECT_URL_AFTER_LOGIN = "http://localhost:3000/Home";
+const REDIRECT_URL_AFTER_LOGIN = "http://localhost:3000/Profile";
 const SPACE_DELIMITER = "%20";
 const SCOPES = [
   "user-read-currently-playing",
