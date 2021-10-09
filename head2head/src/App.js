@@ -14,7 +14,8 @@ import "react-bootstrap";
 import "./App.css";
 import Spotify from "./Components/Spotify";
 import Profile from "./Components/Profile";
-import Player from "./Components/Player";
+
+import MusicPlayer from "./Components/Player";
 
 
 const App = () => {
@@ -59,6 +60,7 @@ const App = () => {
             <Route path='/profile' component={Profile} />
             <Route path="/Spotify" component={Spotify} />
           </Switch>
+          <MusicPlayer/>
         </div>
       </Router>
     </div>

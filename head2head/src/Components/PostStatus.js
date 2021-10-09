@@ -9,6 +9,7 @@ function PostStatus(user) {
 
     const [status,setStatus]= useState("");
     const [allStatus, setAllStatus]= useState([])
+    const [picture , setPicture] = useState({})
 
 
    
@@ -46,8 +47,24 @@ function PostStatus(user) {
         .catch(error => console.log(error))
     }
     
-    
-   
+    const fileUpload = event => {
+        setPicture (event.target.picture)
+    }
+
+    const fileHandler= async () =>{
+        const jwt = localStorage.getItem('token');
+        const userId = jwtDecode(jwt);
+        const pictures = new FormData();
+        pictures.append('image',picture)
+        await axios.post(`http://localhost:5500/api/users/${userId._id}/picture`, pictures,{
+            picture: picture,
+            userId : userId
+        })
+        .then(res =>{
+            console.log(res)
+        });
+        
+    }   
     if (user){
 
     
@@ -56,8 +73,9 @@ function PostStatus(user) {
             <div>
                 <form className= "Login-form" onSubmit={submitHandler}>
                     <input type="text" placeholder="what's on your mind" onChange={(e)=>{setStatus(e.target.value)}}/>
-                    <input type="File" placeholder="Post a Pic" onChange={(e)=>{setStatus(e.target.value)}}/>
                     <Button onClick={()=>{newStatus()}}>Post</Button>
+                    <input type="File" placeholder="Post a Pic" onChange={fileUpload}/>
+                    <Button onClick={fileHandler} >Upload</Button>
                 </form>
             </div>
         </div>
