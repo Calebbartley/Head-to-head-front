@@ -6,8 +6,9 @@ import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import PostStatus from './PostStatus';
-import Player from './Player';
+import SpotifyPlayer from './Player';
 import GetStatus from './GetStatus';
+import MusicPlayer from './Player';
 
 
 function Profile() {
@@ -24,7 +25,8 @@ function Profile() {
         <h1>Profile Page</h1>
         <PostStatus/>
         <GetStatus/>
-        {/*<Player/>*/}
+        <MusicPlayer/>
+        <SpotifyPlayer/>
         <button onClick={Logout}>Logout</button>
       </div>
     );

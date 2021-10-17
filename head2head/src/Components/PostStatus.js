@@ -72,7 +72,7 @@ function PostStatus(user) {
         <div>
             <div>
                 <form className= "Login-form" onSubmit={submitHandler}>
-                    <input type="text" placeholder="what's on your mind" onChange={(e)=>{setStatus(e.target.value)}}/>
+                    <textarea type="text" placeholder="what's on your mind" onChange={(e)=>{setStatus(e.target.value)}}/>
                     <Button onClick={()=>{newStatus()}}>Post</Button>
                     <input type="File" placeholder="Post a Pic" onChange={fileUpload}/>
                     <Button onClick={fileHandler} >Upload</Button>

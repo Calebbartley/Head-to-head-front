@@ -3,6 +3,7 @@ import axios from "axios";
 import jwtDecode from "jwt-decode";
 import { Button, ButtonGroup, Card } from "react-bootstrap";
 import "./Login.css";
+import Likes from "./Likes";
 
 const GetStatus = () => {
   const [status, setStatus] = useState([]);
@@ -23,20 +24,14 @@ const GetStatus = () => {
     }
   };
 
-  useEffect(() => {
-    loadData();
-  }, []);
-
-
-  const LikesCounter = ()=>{
-      
-      useEffect(()=> {
-          const timer = setInterval(()=> {
-              setCounter(counter +1)
-             
-          })
-      }, [])
+  function incrementValue(){
+    let value = parseInt(document.getElementById('number').value, 10);
+    value = isNaN(value) ? 0 : value;
+    value++;
+    document.getElementById('number').value = value;
   }
+
+  
   return (
     <div className="">
       <Card style={{ width: "18rem" }}>
@@ -54,12 +49,13 @@ const GetStatus = () => {
       </Card>
         <div>
             <ButtonGroup aria-label="Basic example">
-            <Button variant="outline-primary" onClick={()=>{LikesCounter()}}>Like {LikesCounter}</Button>{''}
+            <Button variant="outline-primary">Like</Button>{''}
             <Button variant="outline-primary">Comment</Button>{''}
             <Button variant="outline-primary">Share</Button>{''}
             </ButtonGroup>
         </div>
-      <div></div>
+      <div>
+      </div>
     </div>
   );
 };
