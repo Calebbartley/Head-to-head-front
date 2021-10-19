@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Spotify from "./Spotify";
+
+import "./Profile.css";
 
 function WebPlayback(props) {
   const [player, setPlayer] = useState(undefined);
   const [is_paused, setPaused] = useState(false);
   const [is_active, setActive] = useState(false);
-  
-
-
 
   const track = {
     name: "",
@@ -16,11 +14,10 @@ function WebPlayback(props) {
     },
     artists: [{ name: "" }],
   };
-  
+
   const [current_track, setTrack] = useState(track);
 
   useEffect(() => {
-    
     const script = document.createElement("script");
     script.src = "https://sdk.scdn.co/spotify-player.js";
     script.async = true;
@@ -28,7 +25,7 @@ function WebPlayback(props) {
     document.body.appendChild(script);
 
     window.onSpotifyWebPlaybackSDKReady = () => {
-      const token = 'ec51a3bbaf954935b24d88b1818089c9'
+      const token = "ec51a3bbaf954935b24d88b1818089c9";
       const player = new window.Spotify.Player({
         name: "Web Playback SDK",
         getOAuthToken: (cb) => {
@@ -51,72 +48,47 @@ function WebPlayback(props) {
     };
   }, [props.token]);
 
-  window.onload = function () {
+  // window.onload = function () {
 
+  //   document.getElementById('togglePlay').onclick = function() {
+  //     player.togglePlay();
+  //   };
 
-    document.getElementById('togglePlay').onclick = function() {
-      player.togglePlay();
-    };
-    
-    player.addListener("player_state_changed", (state) => {
-      if (!state) {
-        return;
-      }
-      
-      setTrack(state.track_window.current_track);
-      setPaused(state.paused);
-      
-      player.getCurrentState().then((state) => {
-        !state ? setActive(false) : setActive(true);
-      });
-    });
-  }
+  //   player.addListener("player_state_changed", (state) => {
+  //     if (!state) {
+  //       return;
+  //     }
+
+  //     setTrack(state.track_window.current_track);
+  //     setPaused(state.paused);
+
+  //     player.getCurrentState().then((state) => {
+  //       !state ? setActive(false) : setActive(true);
+  //     });
+  //   });
+  // }
 
   return (
     <>
-      <div className="container">
-        <div className="main-wrapper">
-          <img
-            src={current_track.album.images[0].url}
-            className="now-playing__cover"
-            alt=""
-          />
-
-          <div className="now-playing__side">
-            <div className="now-playing__name">{current_track.name}</div>
-
-            <div className="now-playing__artist">
-              {current_track.artists[0].name}
-            </div>
-          </div>
-          <button
-            className="btn-spotify"
-            onClick={() => {
-              player.previousTrack();
-            }}
-          >
-            &lt;&lt;
-          </button>
-
-          <button
-            className="btn-spotify" id=" togglePlay"
-            onClick={() => {
-              player.togglePlay();
-            }}
-          >
-            {is_paused ? "PLAY" : "PAUSE"}
-          </button>
-
-          <button
-            className="btn-spotify"
-            onClick={() => {
-              player.nextTrack();
-            }}
-          >
-            &gt;&gt;
-          </button>
-          <iframe src="https://open.spotify.com/embed/album/1DFixLWuPkv3KT3TnV35m3" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-        </div>
+      <div>
+        <container className="content">
+          <iframe
+            src="https://open.spotify.com/embed/artist/6futYSDVulYR2PktBjTB5W?utm_source=generator"
+            width="25%"
+            height="200"
+            frameBorder="10"
+            allowfullscreen=""
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          ></iframe>
+          <iframe
+            src="https://open.spotify.com/embed/artist/2gINJ8xw86xawPyGvx1bla?utm_source=generator"
+            width="25%"
+            height="200"
+            frameBorder="10"
+            allowfullscreen=""
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          ></iframe>
+        </container>
       </div>
     </>
   );
