@@ -24,13 +24,15 @@ const GetStatus = () => {
     }
   };
 
-  function incrementValue(){
-    let value = parseInt(document.getElementById('number').value, 10);
-    value = isNaN(value) ? 0 : value;
-    value++;
-    document.getElementById('number').value = value;
-  }
+  useEffect(
+    () => {
+      loadData();
+    } , []
+  )
+  const incrementCounter = () => {
+    setCounter(counter + 1);
 
+  }
   
   return (
     <div className="">
@@ -39,7 +41,15 @@ const GetStatus = () => {
           <ul>
             {status.length > 0 ? (
               status.map((data, index) => (
-                <div key={index}>{data["status"]}</div>
+                <div key={index}>{data["status"]}
+                  <div>
+                    <ButtonGroup aria-label="Basic example">
+                      <Button onClick={incrementCounter} variant="outline-primary">Like: {counter}</Button>{''}
+                      <Button variant="outline-primary">Comment</Button>{''}
+                      <Button variant="outline-primary">Share</Button>{''}
+                    </ButtonGroup>
+                  </div>
+                </div>
               ))
             ) : (
               <div> no status</div>
@@ -48,11 +58,7 @@ const GetStatus = () => {
         </Card.Body>
       </Card>
         <div>
-            <ButtonGroup aria-label="Basic example">
-            <Button variant="outline-primary">Like</Button>{''}
-            <Button variant="outline-primary">Comment</Button>{''}
-            <Button variant="outline-primary">Share</Button>{''}
-            </ButtonGroup>
+           
         </div>
       <div>
       </div>

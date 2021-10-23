@@ -63,11 +63,9 @@ function PostStatus(user) {
         .then(res =>{
             console.log(res)
         });
-        
-    }   
+    }
     if (user){
 
-    
     return (
         <div>
             <div>
