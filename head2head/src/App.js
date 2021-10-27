@@ -60,7 +60,7 @@ const App = () => {
             <Route path='/profile' component={Profile} />
             <Route path="/Spotify" component={Spotify} />
           </Switch>
-          <MusicPlayer/>
+          
         </div>
       </Router>
     </div>

@@ -71,7 +71,7 @@ function WebPlayback(props) {
   return (
     <>
       <div>
-        <container className="content">
+        <container className="d-flex flex-row">
           <iframe
             src="https://open.spotify.com/embed/artist/6futYSDVulYR2PktBjTB5W?utm_source=generator"
             width="25%"

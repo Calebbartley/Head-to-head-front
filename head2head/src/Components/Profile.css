@@ -3,3 +3,11 @@
     align-items: center;
     text-align: center;
 }
+
+.d-flex div{
+    padding: 1rem;
+    border: 2px  #fff;
+    color: #fff;
+    text-align: center;
+    align-items: inherit;
+  }

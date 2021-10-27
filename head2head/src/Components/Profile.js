@@ -9,6 +9,7 @@ import PostStatus from "./PostStatus";
 import SpotifyPlayer from "./Player";
 import GetStatus from "./GetStatus";
 import WebPlayback from "./Player";
+import  Player  from "./Player";
 import "./Profile.css"
 
 function Profile() {
@@ -22,17 +23,18 @@ function Profile() {
     <div>
       <h1>Profile Page</h1>
       <button onClick={Logout}>Logout</button>
+      <Player/>
       <container className="content">
         <div>
           <PostStatus />
         </div>
-        <div>
+        </container>
+        <div className="d-flex flex-row">
           <GetStatus />
         </div>
         <div>
          
         </div>
-      </container>
     </div>
   );
 }
