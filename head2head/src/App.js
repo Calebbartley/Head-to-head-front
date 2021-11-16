@@ -46,6 +46,7 @@ const App = () => {
           <div className="logo" >
           </div>
           <Navbar user={user} />
+          <Home/>
           <Switch className="topnav">
             <Route exact path="/" component={Home} />
             <Route path="/Register" component={Register} />

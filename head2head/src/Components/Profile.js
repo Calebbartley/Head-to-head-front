@@ -33,7 +33,7 @@ function Profile() {
         </div>
         </container>
         <div className="d-flex flex-row">
-          <GetStatus rerender ={rerender}/>
+          <GetStatus className="stats" rerender ={rerender}/>
         </div>
         <div>
          

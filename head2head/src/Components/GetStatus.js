@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 import { Button, ButtonGroup, Card } from "react-bootstrap";
-import "./Login.css";
+import "./GetStatus.css";
 import Likes from "./Likes";
 
 const GetStatus = (props) => {
@@ -35,15 +35,15 @@ const GetStatus = (props) => {
   }
   
   return (
-    <div className="">
-      <Card style={{ width: "18rem" }}>
-        <Card.Body>
-          <ul>
+    <div >
+      <Card  style={{ width: "18rem" }}>
+        <Card.Body >
+          <ul >
           {console.log(status)}
             {status.length > 0 ? (
               status.slice(0).reverse().map((data, index) => (
-                <div key={index}>{data["status"]}
-                  <div>
+                <div className="stats" key={index}>{data["status"]}
+                  <div >
                     <ButtonGroup aria-label="Basic example">
                       <Button onClick={()=>incrementCounter(data.userId, data._id)} variant="outline-primary">Like: {data.likes}</Button>{''}
                       <Button variant="outline-primary">Comment</Button>{''}

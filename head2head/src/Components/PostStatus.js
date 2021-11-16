@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback} from 'react';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
-import './Login.css'
+import './GetStatus.css'
 import {Button, FormGroup, FormLabel} from "react-bootstrap"
 
 
@@ -66,8 +66,8 @@ const PostStatus=(props) =>{
 
     return (
         <div>
-            <div>
-                <form className= "Login-form" onSubmit={submitHandler}>
+            <div >
+                <form className="stats" onSubmit={submitHandler}>
                     <textarea type="text" placeholder="what's on your mind" onChange={(e)=>{setStatus(e.target.value)}}/>
                     <Button onClick={()=>{newStatus()}}>Post</Button>
                     <input type="File" placeholder="Post a Pic" onChange={fileUpload}/>
