@@ -5,16 +5,23 @@ import './Login.css'
 import {Button, FormGroup, FormLabel} from "react-bootstrap"
 
 
-function PostStatus(user) {
+const PostStatus=(props) =>{
 
     const [status,setStatus]= useState("");
     const [allStatus, setAllStatus]= useState([])
     const [picture , setPicture] = useState({})
 
 
-   
-    
+
     useEffect(()=> {
+        loadData()
+    })
+
+    const submitHandler =(e) => {
+        e.preventDefault();
+    };
+
+    const loadData = async () => {
         const jwt = localStorage.getItem('token');
         const userId = jwtDecode(jwt);
         axios.get(`http://localhost:5500/api/users/${userId._id}/status`)
@@ -24,13 +31,7 @@ function PostStatus(user) {
         .catch(err =>{
             console.log(err)
         })
-    })
-
-    const submitHandler =(e) => {
-        e.preventDefault();
-    };
-
-    
+    }
     
     const newStatus = async () => {
         const jwt = localStorage.getItem('token');
@@ -40,11 +41,8 @@ function PostStatus(user) {
            status: status,
            userId: userId,
         })
-        .then((res) => {
-            console.log(res)
-            setStatus(res)
-        })
-        .catch(error => console.log(error))
+        props.changeRender()
+        console.log("Stuff")
     }
     
     const fileUpload = event => {
@@ -64,7 +62,7 @@ function PostStatus(user) {
             console.log(res)
         });
     }
-    if (user){
+   
 
     return (
         <div>
@@ -78,12 +76,7 @@ function PostStatus(user) {
             </div>
         </div>
     )
-}
-else{
-    return(
-        <h1>NOPE</h1>
-    )
-}
+
 }
 // <div>
 // <h1>Statuses :</h1>

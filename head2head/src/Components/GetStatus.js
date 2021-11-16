@@ -5,7 +5,7 @@ import { Button, ButtonGroup, Card } from "react-bootstrap";
 import "./Login.css";
 import Likes from "./Likes";
 
-const GetStatus = () => {
+const GetStatus = (props) => {
   const [status, setStatus] = useState([]);
   const [counter, setCounter]= useState(0);
   const jwt = localStorage.getItem("token");
@@ -27,11 +27,11 @@ const GetStatus = () => {
   useEffect(
     () => {
       loadData();
-    } , []
+    } , [props.rerender]
   )
-  const incrementCounter = () => {
-    setCounter(counter + 1);
-
+  const incrementCounter = (userId, statusId) => {
+    let response = axios.patch(`http://localhost:5500/api/users/${userId}/status/like/${statusId}`,null, {headers:{'x-auth-token': jwt}} )
+    loadData();
   }
   
   return (
@@ -39,12 +39,13 @@ const GetStatus = () => {
       <Card style={{ width: "18rem" }}>
         <Card.Body>
           <ul>
+          {console.log(status)}
             {status.length > 0 ? (
-              status.map((data, index) => (
+              status.slice(0).reverse().map((data, index) => (
                 <div key={index}>{data["status"]}
                   <div>
                     <ButtonGroup aria-label="Basic example">
-                      <Button onClick={incrementCounter} variant="outline-primary">Like: {counter}</Button>{''}
+                      <Button onClick={()=>incrementCounter(data.userId, data._id)} variant="outline-primary">Like: {data.likes}</Button>{''}
                       <Button variant="outline-primary">Comment</Button>{''}
                       <Button variant="outline-primary">Share</Button>{''}
                     </ButtonGroup>

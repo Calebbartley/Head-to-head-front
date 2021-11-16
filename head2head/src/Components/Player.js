@@ -69,11 +69,11 @@ function WebPlayback(props) {
   // }
 
   return (
-    <>
+   
       <div>
         <container className="d-flex flex-row">
           <iframe
-            src="https://open.spotify.com/embed/artist/6futYSDVulYR2PktBjTB5W?utm_source=generator"
+            src="https://open.spotify.com/embed/artist/6futYSDVulYR2PktBjTB5W?utm_source=generator/"
             width="25%"
             height="200"
             frameBorder="10"
@@ -81,7 +81,7 @@ function WebPlayback(props) {
             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
           ></iframe>
           <iframe
-            src="https://open.spotify.com/embed/artist/2gINJ8xw86xawPyGvx1bla?utm_source=generator"
+            src="https://open.spotify.com/embed/artist/2gINJ8xw86xawPyGvx1bla?utm_source=generator/"
             width="25%"
             height="200"
             frameBorder="10"
@@ -90,7 +90,6 @@ function WebPlayback(props) {
           ></iframe>
         </container>
       </div>
-    </>
   );
 }
 

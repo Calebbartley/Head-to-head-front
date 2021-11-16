@@ -13,12 +13,15 @@ import  Player  from "./Player";
 import "./Profile.css"
 
 function Profile() {
+  const [rerender, setRerender] = React.useState(false);
   const Logout = () => {
     localStorage.removeItem("token");
     console.log("Has been logged out");
     window.location = "/home";
   };
-
+  const changeRender=()=>{
+    setRerender(!rerender);
+  }
   return (
     <div>
       <h1>Profile Page</h1>
@@ -26,11 +29,11 @@ function Profile() {
       <Player/>
       <container className="content">
         <div>
-          <PostStatus />
+          <PostStatus changeRender={changeRender}/>
         </div>
         </container>
         <div className="d-flex flex-row">
-          <GetStatus />
+          <GetStatus rerender ={rerender}/>
         </div>
         <div>
          
